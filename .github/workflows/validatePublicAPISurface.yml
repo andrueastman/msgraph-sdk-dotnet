@@ -19,7 +19,7 @@ jobs:
       - uses: microsoftgraph/kiota-dom-export-diff-tool/export@alignment
         id: generatePatch
       - name: Print new build number
-        run: ls -la
+        run: pwd
       - uses: microsoftgraph/kiota-dom-export-diff-tool/tool@alignment
         if: ${{ steps.generatePatch.outputs.patchFilePath != '' }}
         with:
