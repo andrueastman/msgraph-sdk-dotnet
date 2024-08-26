@@ -30,7 +30,7 @@ jobs:
         if: ${{ always() && steps.generatePatch.outputs.patchFilePath != '' && steps.diff.outputs.hasExplanations == 'true' && github.event_name == 'pull_request' }}
         continue-on-error: true
         with:
-          comment: ${{ github.workspace }}/LICENCE.txt
+          comment: 'LICENCE.txt'
           prNumber: ${{ github.event.pull_request.number }}
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Upload patch file as artifact
