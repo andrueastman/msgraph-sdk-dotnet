@@ -16,17 +16,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: microsoftgraph/kiota-dom-export-diff-tool/export@alignment
+      - uses: microsoftgraph/kiota-dom-export-diff-tool/export@main
         id: generatePatch
       - name: Print new build number
         run: pwd
-      - uses: microsoftgraph/kiota-dom-export-diff-tool/tool@alignment
+      - uses: microsoftgraph/kiota-dom-export-diff-tool/tool@main
         if: ${{ steps.generatePatch.outputs.patchFilePath != '' }}
         with:
           path: ${{ steps.generatePatch.outputs.patchFilePath }}
           fail-on-removal: true
         id: diff
-      - uses: microsoftgraph/kiota-dom-export-diff-tool/comment@alignment
+      - uses: microsoftgraph/kiota-dom-export-diff-tool/comment@main
         if: ${{ always() && steps.generatePatch.outputs.patchFilePath != '' && steps.diff.outputs.hasExplanations == 'true' && github.event_name == 'pull_request' }}
         continue-on-error: true
         with:
