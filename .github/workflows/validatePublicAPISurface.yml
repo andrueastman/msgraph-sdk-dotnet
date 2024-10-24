@@ -16,6 +16,7 @@ jobs:
   validate-public-api-surface:
     runs-on: windows-latest
     steps:
+      - run: git config --system core.longpaths true
       - uses: actions/checkout@v4
       - uses: microsoftgraph/kiota-dom-export-diff-tool/export@fixSha
         id: generatePatch
