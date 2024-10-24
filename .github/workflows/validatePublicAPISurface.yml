@@ -14,7 +14,7 @@ permissions:
 
 jobs:
   validate-public-api-surface:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     steps:
       - uses: actions/checkout@v4
       - uses: microsoftgraph/kiota-dom-export-diff-tool/export@fixSha
