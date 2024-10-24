@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
   push:
   pull_request:
-    branches: [ 'main' ,'dev' ]
+    branches: [ 'dev' ]
     paths: 'src/**/Generated/**'
 
 permissions:
@@ -17,15 +17,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: microsoftgraph/kiota-dom-export-diff-tool/export@main
+      - uses: microsoftgraph/kiota-dom-export-diff-tool/export@fixSha
         id: generatePatch
-      - uses: microsoftgraph/kiota-dom-export-diff-tool/tool@main
+      - uses: microsoftgraph/kiota-dom-export-diff-tool/tool@fixSha
         if: ${{ steps.generatePatch.outputs.patchFilePath != '' }}
         with:
           path: ${{ steps.generatePatch.outputs.patchFilePath }}
           fail-on-removal: true
         id: diff
-      - uses: microsoftgraph/kiota-dom-export-diff-tool/comment@main
+      - uses: microsoftgraph/kiota-dom-export-diff-tool/comment@fixSha
         if: ${{ always() && steps.generatePatch.outputs.patchFilePath != '' && steps.diff.outputs.hasExplanations != '' && github.event_name == 'pull_request' }}
         continue-on-error: true
         with:
